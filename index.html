@@ -178,14 +178,9 @@ footer a{color:var(--acc)}
 @keyframes waBlink{0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,.45),0 8px 24px rgba(0,0,0,.4)}50%{box-shadow:0 0 0 10px rgba(37,211,102,0),0 8px 24px rgba(0,0,0,.4)}}
 
 /* chatbot: lançador discreto no topo direito */
-.bot-launch{position:fixed;top:76px;right:14px;z-index:70;display:flex;align-items:center;gap:8px;background:rgba(11,24,50,.92);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:40px;padding:5px 12px 5px 5px;cursor:pointer;font-family:inherit;color:var(--txt);box-shadow:0 6px 20px rgba(0,0,0,.35);transition:.2s}
-.bot-launch:hover{border-color:var(--acc)}
 .bot-av{width:36px;height:36px;border-radius:50%;background:var(--acc-soft);display:grid;place-items:center;overflow:hidden;position:relative;flex-shrink:0;font-size:1.1rem}
 .bot-av img{width:100%;height:100%;object-fit:cover}
-.bot-launch .on-dot,.bot-head .on-dot{position:absolute;right:1px;bottom:1px;width:10px;height:10px;border-radius:50%;background:#25d366;border:2px solid var(--card)}
-.bot-launch .t{display:flex;flex-direction:column;line-height:1.15;text-align:left}
-.bot-launch .t b{font-size:.78rem}
-.bot-launch .t small{font-size:.66rem;color:#7fd8a0}
+.bot-head .on-dot{position:absolute;right:1px;bottom:1px;width:10px;height:10px;border-radius:50%;background:#25d366;border:2px solid var(--card)}
 
 .bot-win{position:fixed;top:76px;right:14px;z-index:80;width:min(370px,calc(100vw - 28px));height:min(560px,calc(100vh - 100px));background:var(--card);border:1px solid var(--line);border-radius:20px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,.6);transform-origin:top right;transition:.25s}
 .bot-win[hidden]{display:flex;opacity:0;transform:scale(.9);pointer-events:none}
@@ -240,7 +235,7 @@ footer a{color:var(--acc)}
 @keyframes flow{to{background-position:300% 0}}
 @keyframes shine{to{background-position:-200% 0}}
 @keyframes fly{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-6px) rotate(6deg)}}
-@media(max-width:600px){.bot-launch .t b{display:none}.bot-launch{padding:4px 10px 4px 4px}.bot-launch .bot-av{width:30px;height:30px;font-size:.95rem}.bot-win{top:70px}}
+@media(max-width:600px){.bot-win{top:70px}}
 
 /* ===== PREMIUM ===== */
 body{background:radial-gradient(1200px 600px at 80% -10%,rgba(242,201,76,.07),transparent 60%),var(--bg)}
@@ -333,6 +328,25 @@ html.anim .hero .rv{transition-duration:1.1s}
 .lb img{max-width:100%;max-height:90vh;border-radius:12px;border:2px solid var(--gold)}
 .lb button{position:absolute;top:14px;right:18px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer}
 @media(max-width:1000px){.menu{display:none}}
+.bot-bubble{position:fixed;top:80px;right:16px;z-index:70;display:flex;flex-direction:column;align-items:flex-end;gap:10px;opacity:0;transform:translateY(-14px) scale(.85);pointer-events:none;transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1)}
+.bot-bubble.show{opacity:1;transform:none;pointer-events:auto}
+.bot-launch{position:relative;width:62px;height:62px;border-radius:50%;padding:3px;border:none;cursor:pointer;background:linear-gradient(145deg,#f2c94c,#a8812a);box-shadow:0 10px 28px rgba(0,0,0,.5),0 0 0 0 rgba(242,201,76,.5);animation:botPulse 2.4s ease-out infinite;transition:transform .25s}
+.bot-launch:hover{transform:scale(1.07)}
+.bot-launch .bot-av{width:100%;height:100%;border:2px solid var(--bg)}
+.bot-launch .on-dot{position:absolute;right:2px;bottom:3px;width:14px;height:14px;border-radius:50%;background:#25d366;border:2px solid var(--bg)}
+@keyframes botPulse{0%{box-shadow:0 10px 28px rgba(0,0,0,.5),0 0 0 0 rgba(242,201,76,.5)}70%{box-shadow:0 10px 28px rgba(0,0,0,.5),0 0 0 14px rgba(242,201,76,0)}100%{box-shadow:0 10px 28px rgba(0,0,0,.5),0 0 0 0 rgba(242,201,76,0)}}
+.bot-tip{position:relative;background:rgba(11,24,50,.96);backdrop-filter:blur(8px);border:1px solid rgba(242,201,76,.4);border-radius:14px;padding:10px 14px;text-align:right;box-shadow:0 12px 30px rgba(0,0,0,.45);white-space:nowrap}
+.bot-tip::before{content:"";position:absolute;top:-6px;right:24px;width:10px;height:10px;background:rgba(11,24,50,.96);border-left:1px solid rgba(242,201,76,.4);border-top:1px solid rgba(242,201,76,.4);transform:rotate(45deg)}
+.bot-tip span{display:block;font-size:.78rem;color:#7fd8a0;font-weight:600}
+.bot-tip b{display:block;font-size:.88rem;color:var(--txt)}
+@media(max-width:600px){.bot-bubble{top:74px;right:12px}.bot-launch{width:56px;height:56px}}
+@media (prefers-reduced-motion:reduce){.bot-launch{animation:none}}
+.rec{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;margin-top:12px;padding:12px;border-radius:12px;background:linear-gradient(135deg,rgba(242,201,76,.14),rgba(242,201,76,.03));border:1px dashed rgba(242,201,76,.5)}
+.rec div{text-align:center}
+.rec b{display:block;color:var(--acc);font-family:'Playfair Display',serif;font-size:1.15rem}
+.rec span{display:block;font-size:.76rem;color:var(--muted);line-height:1.35}
+.rec i{font-style:normal;color:var(--acc);font-weight:700;font-size:1.2rem}
+.rec-note{display:inline-block;margin-left:6px;font-size:.78rem;color:#7fd8a0;font-weight:600}
 @media(max-width:900px){.stats-bar{grid-template-columns:1fr 1fr;margin-top:44px}.stats-bar div:nth-child(2){border-right:none}.stats-bar div{border-bottom:1px solid var(--line);text-align:center}.gal2,.lines{grid-template-columns:1fr}.cat-search{flex-direction:column}.tabs{display:grid;grid-template-columns:1fr 1fr;width:100%}.tabs button{padding:12px 8px;font-size:.85rem}.cat-card ul{columns:1}}
 @media(max-width:900px){.svc-grid{grid-template-columns:1fr}.hero::before{width:340px;height:340px;right:-140px}}
 
@@ -378,7 +392,7 @@ html.anim .hero .rv{transition-duration:1.1s}
     </div>
   </div>
   <div class="container stats-bar">
-    <div><b>+300</b><span>produtos no portfólio</span></div>
+    <div><b>+600</b><span>produtos no portfólio</span></div>
     <div><b>8</b><span>mercados de atuação</span></div>
     <div><b>14</b><span>formas de ganho</span></div>
     <div><b>Brasil</b><span>atuação nacional</span></div>
@@ -427,7 +441,7 @@ html.anim .hero .rv{transition-duration:1.1s}
     <h2>Quanto você pode <em>ganhar?</em></h2>
     <p class="lead">Escolha como você quer trabalhar e mexa nos valores para ver o resultado.</p>
     <div class="tabs">
-      <button class="on" data-tab="rede">Montando rede</button>
+      <button class="on" data-tab="rede">Construindo seu time de vendas (rede)</button>
       <button data-tab="revenda">Revendendo perfumes</button>
     </div>
 
@@ -457,7 +471,7 @@ html.anim .hero .rv{transition-duration:1.1s}
       <span class="lbl">Compare as graduações (mesmas compras)</span>
       <div class="tbl"><table class="compare" id="compare"></table></div>
 
-      <a class="btn btn-wa" data-wa="Olá, Vitoriano! Fiz a simulação de rede no seu site e quero ser consultor(a) da Atlântica Natural." href="#"><svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-1 1.2-.4.2-.7.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.4 3.4 0 0 0-1 2.5 5.9 5.9 0 0 0 1.2 3.1 13.5 13.5 0 0 0 5.2 4.6c1.9.8 2.7.9 3.6.7a3.1 3.1 0 0 0 2-1.4 2.5 2.5 0 0 0 .2-1.4c-.1-.1-.3-.2-.6-.3zM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zm8.4-18.2A11.8 11.8 0 0 0 1.8 17.9L.1 24l6.3-1.7A11.8 11.8 0 0 0 24 12a11.7 11.7 0 0 0-3.6-8.4z"/></svg> Quero montar minha rede</a>
+      <a class="btn btn-wa" data-wa="Olá, Vitoriano! Fiz a simulação de rede no seu site e quero ser consultor(a) da Atlântica Natural." href="#"><svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-1 1.2-.4.2-.7.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.4 3.4 0 0 0-1 2.5 5.9 5.9 0 0 0 1.2 3.1 13.5 13.5 0 0 0 5.2 4.6c1.9.8 2.7.9 3.6.7a3.1 3.1 0 0 0 2-1.4 2.5 2.5 0 0 0 .2-1.4c-.1-.1-.3-.2-.6-.3zM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zm8.4-18.2A11.8 11.8 0 0 0 1.8 17.9L.1 24l6.3-1.7A11.8 11.8 0 0 0 24 12a11.7 11.7 0 0 0-3.6-8.4z"/></svg> Quero construir meu time de vendas (rede)</a>
       <p class="note">Simulação ilustrativa. O bônus é calculado sobre a pontuação de bônus de cada compra e só é pago a quem está ativo no mês. Aqui usamos o valor da compra em reais para facilitar o entendimento. Confirme os detalhes com o Vitoriano.</p>
     </div>
 
@@ -535,9 +549,9 @@ html.anim .hero .rv{transition-duration:1.1s}
   <div class="container center">
     <span class="tag">Portfólio completo</span>
     <h2>Produtos, serviços e oportunidade <em>no mesmo lugar</em></h2>
-    <p class="lead">São mais de 400 produtos de consumo, serviços digitais e um plano de crescimento, tudo reunido para você ter várias formas de vender e empreender.</p>
+    <p class="lead">São mais de 600 produtos de consumo, serviços digitais e um plano de crescimento, tudo reunido para você ter várias formas de vender e empreender.</p>
     <div class="cards">
-      <div class="card"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></span><span class="cat">Produtos</span><h3>+400 itens ozonizados</h3><p>Linha ampla de saúde, bem-estar e cuidados pessoais, feita para entrar na rotina dos seus clientes e gerar recompra.</p></div>
+      <div class="card"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></span><span class="cat">Produtos</span><h3>Linha ozonizada Natuoz</h3><p>Linha ampla de saúde, bem-estar e cuidados pessoais, feita para entrar na rotina dos seus clientes e gerar recompra.</p></div>
       <div class="card"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.14-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.14a.5.5 0 0 1 .96 0l1.58 6.14a2 2 0 0 0 1.44 1.44l6.14 1.58a.5.5 0 0 1 0 .96l-6.14 1.58a2 2 0 0 0-1.44 1.44l-1.58 6.14a.5.5 0 0 1-.96 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/></svg></span><span class="cat">Revenda</span><h3>Perfumaria e cosméticos</h3><p>Perfumes com inspiração em grandes grifes e linha árabe, com margem que pode chegar a 100% de lucro na revenda.</p></div>
       <div class="card"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg></span><span class="cat">Saúde</span><h3>ATL Med</h3><p>Por a partir de R$ 29,90, a família tem médico disponível 24 horas e acesso a mais de 12 especialidades.</p></div>
       <div class="card"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="15" x="2" y="7" rx="2"/><polyline points="17 2 12 7 7 2"/></svg></span><span class="cat">Entretenimento</span><h3>ATL TV</h3><p>Mais de 170 canais em um serviço digital que agrada a casa inteira e amplia o que você tem para oferecer.</p></div>
@@ -551,10 +565,10 @@ html.anim .hero .rv{transition-duration:1.1s}
 <section>
   <div class="container center">
     <span class="tag">Linhas de produtos</span>
-    <h2>Mais de 300 produtos para <em>todas as rotinas</em></h2>
+    <h2>Mais de 600 produtos para <em>todas as rotinas</em></h2>
     <p class="lead">Suplementos, vitaminas, emagrecimento, ozonizados, cuidados diários, linha capilar, Nemawashi e perfumaria. Toque para ampliar.</p>
     <div class="lines">
-      <figure><div class="photo"><img class="zoom" src="img/produtos-300.jpg" alt="Mais de 300 produtos" loading="lazy"></div><figcaption><b>+300 produtos</b><span>Suplementos, vitaminas e nutracêuticos</span></figcaption></figure>
+      <figure><div class="photo"><img class="zoom" src="img/produtos-600.jpg" alt="Mais de 600 produtos Atlântica Natural" loading="lazy"></div><figcaption><b>+600 produtos</b><span>Saúde, beleza, bem-estar e perfumaria</span></figcaption></figure>
       <figure><div class="photo"><img class="zoom" src="img/natuoz.jpg" alt="Linha Natuoz Ozonizada" loading="lazy"></div><figcaption><b>Linha Natuoz</b><span>Óleos ozonizados</span></figcaption></figure>
       <figure><div class="photo"><img class="zoom" src="img/bem-estar.jpg" alt="Bem-estar e cuidados diários" loading="lazy"></div><figcaption><b>Cuidados diários</b><span>Bem-estar e cuidados com o corpo</span></figcaption></figure>
       <figure><div class="photo"><img class="zoom" src="img/capilar.jpg" alt="Linha Capilar Natuoz Ozonizada" loading="lazy"></div><figcaption><b>Linha capilar</b><span>Cuidados capilares ozonizados</span></figcaption></figure>
@@ -721,10 +735,12 @@ html.anim .hero .rv{transition-duration:1.1s}
   </div>
 </footer>
 <!-- CHATBOT -->
-<button class="bot-launch" id="botOpen" aria-label="Abrir atendimento">
-  <span class="bot-av"><span class="avfill"></span><span class="on-dot"></span></span>
-  <span class="t"><b>Tire suas dúvidas</b><small>● Estamos online</small></span>
-</button>
+<div class="bot-bubble" id="botBubble" aria-live="polite">
+  <button class="bot-launch" id="botOpen" aria-label="Abrir atendimento virtual">
+    <span class="bot-av"><span class="avfill"></span></span><span class="on-dot"></span>
+  </button>
+  <div class="bot-tip"><span>🟢 Estamos online!</span><b>Precisando de ajuda?</b></div>
+</div>
 <div class="bot-win" id="botWin" hidden role="dialog" aria-label="Atendente virtual">
   <div class="bot-head">
     <span class="bot-av"><span class="avfill"></span><span class="on-dot"></span></span>
@@ -853,7 +869,7 @@ calc();
 /* ===== Venda direta ATL Services ===== */
 var GRUPOS=[
  {img:'img/atl-services.jpg',ic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg>',n:'ATL Med',d:'Telemedicina 24h',p:[['Onmed Start · 1 vida',15],['Onmed Start · 4 vidas',30],['Onmed Pró · 1 vida',20],['Onmed Pró · 4 vidas',45]]},
- {ic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2"/><path d="M12 18h.01"/><path d="M9 6h6"/></svg>',n:'ATL Next',img:'img/atl-next.jpg',d:'Internet · Chip e eSIM',p:[['Chip / eSIM',15]]},
+ {ic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2"/><path d="M12 18h.01"/><path d="M9 6h6"/></svg>',n:'ATL Next',img:'img/atl-next.jpg',d:'Internet · Chip e eSIM',p:[['Chip / eSIM',15]],extra:'<div class="rec"><div><b>R$ 15,00</b><span>por adesão de cada cliente</span></div><i>+</i><div><b>Todo mês</b><span>ganho recorrente enquanto o cliente continuar pagando</span></div></div>'},
  {ic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="15" x="2" y="7" rx="2"/><polyline points="17 2 12 7 7 2"/></svg>',n:'ATL TV',img:'img/atl-tv.jpg',d:'Mais de 170 canais',p:[['Assinatura ATL TV',35]]}
 ];
 var vdSel={g:2,i:0}, vdQ=3;
@@ -866,6 +882,7 @@ GRUPOS.forEach(function(g,gi){
     b.addEventListener('click',function(){vdSel={g:gi,i:pi};calcVD()});
     c.appendChild(b);
   });
+  if(g.extra)c.insertAdjacentHTML('beforeend',g.extra);
   $('svcGrid').appendChild(c);
 });
 function chipGroup(box,items,sel,on){
@@ -874,7 +891,7 @@ function chipGroup(box,items,sel,on){
 }
 var QTDS=[1,3,5,10];
 chipGroup($('vdQtd'),QTDS.map(function(q){return q+' por dia'}),1,function(k){vdQ=QTDS[k];calcVD()});
-function calcVD(){var g=GRUPOS[vdSel.g],pl=g.p[vdSel.i],v=pl[1];document.querySelectorAll('.opt').forEach(function(o){o.classList.toggle('on',+o.dataset.g===vdSel.g&&+o.dataset.i===vdSel.i)});$('svcSel').innerHTML='Plano escolhido: <b>'+g.n+' · '+pl[0]+'</b>';$('vdUni').textContent=brl(v);$('vdMes').textContent=vdQ*30;$('vdTotal').textContent=brl(v*vdQ*30)}
+function calcVD(){var g=GRUPOS[vdSel.g],pl=g.p[vdSel.i],v=pl[1];document.querySelectorAll('.opt').forEach(function(o){o.classList.toggle('on',+o.dataset.g===vdSel.g&&+o.dataset.i===vdSel.i)});$('svcSel').innerHTML='Plano escolhido: <b>'+g.n+' · '+pl[0]+'</b>'+(g.extra?' <span class="rec-note">+ ganho recorrente todo mês</span>':'');$('vdUni').textContent=brl(v);$('vdMes').textContent=vdQ*30;$('vdTotal').textContent=brl(v*vdQ*30)}
 
 /* ===== ATL Energy ===== */
 var CONTAS=[300,500,1000,2000];
@@ -899,14 +916,14 @@ var WA_CTA=function(t){return '<br><a href="'+waLink(t||'Olá, Vitoriano! Vim pe
 
 var KB=[
  {k:['oi','ola','olá','bom dia','boa tarde','boa noite','tudo bem','e ai'],r:'Olá! 😊 Que bom te ver por aqui. Posso te explicar o que é a Atlântica Natural, como se cadastrar, os produtos e quanto dá para ganhar. O que você quer saber?'},
- {k:['o que e','oque e','atlantica','empresa','quem sao','sobre a'],r:'A Atlântica Natural é uma empresa de vendas diretas que une <b>mais de 400 produtos</b> (ozonizados, perfumaria e cosméticos) com <b>serviços</b> como ATL Med, ATL TV, ATL Next e ATL Energy. Como consultor(a), você ganha vendendo e também montando sua equipe.'},
+ {k:['o que e','oque e','atlantica','empresa','quem sao','sobre a'],r:'A Atlântica Natural é uma empresa de vendas diretas que une <b>mais de 600 produtos</b> (ozonizados, perfumaria e cosméticos) com <b>serviços</b> como ATL Med, ATL TV, ATL Next e ATL Energy. Como consultor(a), você ganha vendendo e também montando sua equipe.'},
  {k:['cadastr','como entro','como entrar','participar','comecar','começar','inscrever','me tornar','ser consultor','quero entrar'],r:'Para se cadastrar é simples: você fala com o Vitoriano, ele te passa o link de cadastro e te acompanha nos primeiros passos, do primeiro pedido até as primeiras vendas.'+WA_CTA('Olá, Vitoriano! Quero me cadastrar na Atlântica Natural.')},
  {k:['quanto custa','valor para entrar','investimento','preco para','preço para','taxa','pagar para','kit','adesao','adesão inicial','mensalidade'],r:'Os valores de entrada e de ativação mensal podem mudar, então o Vitoriano te passa as opções atualizadas e te ajuda a escolher a melhor para o seu momento.'+WA_CTA('Olá, Vitoriano! Quanto custa para começar na Atlântica Natural?')},
- {k:['produto','ozoniz','oleo','óleo','creme','linha'],r:'São <b>mais de 400 produtos ozonizados</b> de saúde, bem-estar e cuidados pessoais, além de perfumaria e cosméticos. Você pode ver tudo no catálogo virtual, no botão "Ver catálogo virtual" aqui do site.'},
+ {k:['produto','ozoniz','oleo','óleo','creme','linha'],r:'São <b>mais de 600 produtos</b>, entre ozonizados, suplementos, linha capilar e itens de saúde, bem-estar e cuidados pessoais, além de perfumaria e cosméticos. Você pode ver tudo no catálogo virtual, no botão "Ver catálogo virtual" aqui do site.'},
  {k:['perfume','cosmet','arabe','árabe','fragrancia'],r:'Na perfumaria tem perfumes com inspiração em grandes grifes e uma linha árabe. Exemplo: comprando um perfume por <b>R$ 20</b> e vendendo por <b>R$ 45</b>, o lucro é de R$ 25 por unidade. Vendendo 2 por dia, são cerca de <b>R$ 1.500 no mês</b>; 3 por dia, <b>R$ 2.250</b>. Tem um simulador no site!'},
  {k:['med','medico','médico','telemedicina','saude','saúde','consulta','onmed'],r:'O <b>ATL Med</b> é um plano de telemedicina a partir de <b>R$ 29,90</b>, com médico 24h e mais de 12 especialidades. Na venda direta você ganha por adesão: Onmed Start 1 vida R$ 15, Start 4 vidas R$ 30, Pró 1 vida R$ 20 e Pró 4 vidas R$ 45.'},
  {k:['tv','canais','streaming','filme'],r:'A <b>ATL TV</b> tem mais de 170 canais. Na venda direta você ganha <b>R$ 35 por adesão</b>. Vendendo 3 por dia, são cerca de R$ 3.150 no mês.'},
- {k:['internet','chip','esim','next','celular','plano movel'],r:'O <b>ATL Next</b> oferece planos de internet e chip/eSIM. Na venda direta você ganha <b>R$ 15 por adesão</b>.'},
+ {k:['internet','chip','esim','next','celular','plano movel'],r:'O <b>ATL Next</b> oferece chip físico e eSIM com internet. Você ganha de duas formas: <b>R$ 15 pela adesão</b> de cada cliente e um <b>ganho recorrente todo mês</b> enquanto o cliente continuar pagando.'},
  {k:['energia','energy','luz','kwh','conta de luz'],r:'Com a <b>ATL Energy</b> o cliente economiza cerca de <b>20%</b> na energia e você ganha <b>40%</b> pela indicação. Exemplo: um cliente de 1.000 kWh economiza 200 kWh por mês e você ganha R$ 400. Com 10 clientes assim, R$ 4.000. Tem um simulador aqui no site!'},
  {k:['ganh','renda','lucro','dinheiro','comiss','salario','salário'],r:'Você ganha de 3 formas:<br>1️⃣ <b>Revenda</b>: o lucro de cada produto vendido.<br>2️⃣ <b>Serviços</b>: valor por adesão (ATL Med, TV, Next) e indicação de energia.<br>3️⃣ <b>Rede</b>: Bônus de Produtividade sobre as compras da sua equipe.<br>Use os simuladores do site para ver os números.'},
  {k:['bonus','bônus','produtividade','porcentagem','nivel','nível','niveis','níveis'],r:'No <b>Bônus de Produtividade</b> você ganha uma % das compras da sua rede:<br>• Bronze: 3% e 3% (2 níveis)<br>• Prata: 6%, 6%, 3%<br>• Ouro: 9%, 9%, 6%, 3%<br>• Esmeralda: 12%, 12%, 9%, 6%, 3%<br>• Diamante: 15%, 15%, 12%, 9%, 6%, 3%<br>É preciso estar ativo no mês.'},
@@ -941,11 +958,14 @@ function botSay(html){
 function ask(q){if(!q.trim())return;addMsg(q.replace(/</g,'&lt;'),'me');botSay(answer(q))}
 SUG.forEach(function(s){var b=document.createElement('button');b.textContent=s;b.onclick=function(){ask(s)};$('botSug').appendChild(b)});
 var botStarted=false;
-function openBot(){$('botWin').hidden=false;$('botOpen').style.display='none';
+function openBot(){$('botWin').hidden=false;clearTimeout(botHideT);$('botBubble').classList.remove('show');
   if(!botStarted){botStarted=true;botSay('Olá! 👋 Sou a atendente virtual do Vitoriano. Posso tirar suas dúvidas sobre a Atlântica Natural: produtos, cadastro, ganhos e bônus. Toque em uma pergunta abaixo ou digite a sua.')}
   setTimeout(function(){$('botIn').focus()},300);}
-function closeBot(){$('botWin').hidden=true;$('botOpen').style.display=''}
-$('botOpen').onclick=openBot;$('botClose').onclick=closeBot;
+function closeBot(){$('botWin').hidden=true}
+$('botOpen').onclick=openBot;
+/* bolinha: aparece após 3s e some após 8s */
+var botHideT;
+setTimeout(function(){$('botBubble').classList.add('show');botHideT=setTimeout(function(){$('botBubble').classList.remove('show')},8000)},3000);$('botClose').onclick=closeBot;
 $('botForm').addEventListener('submit',function(e){e.preventDefault();var v=$('botIn').value;$('botIn').value='';ask(v)});
 
 /* ===== POP-UP DE SAÍDA ===== */
