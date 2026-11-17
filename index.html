@@ -212,14 +212,37 @@ footer a{color:var(--acc)}
 /* pop-up de saída */
 .exit{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);display:grid;place-items:center;padding:20px}
 .exit[hidden]{display:none}
-.exit-box{background:var(--card);border:1px solid var(--gold);border-radius:22px;max-width:420px;width:100%;padding:34px 26px;text-align:center;position:relative;animation:pop .3s ease}
-.exit-box .avatar{width:96px;height:96px}
-.exit-box h3{font-size:1.6rem;margin-bottom:8px}
-.exit-box p{color:var(--muted);margin-bottom:22px}
-.exit-box .btn{width:100%;margin-bottom:10px}
-.exit-tag{display:block;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--acc);margin-bottom:6px}
-.exit-num{display:block;color:var(--muted);font-size:.8rem;margin-top:4px}
-.exit-box .ico svg{width:34px;height:34px}
+
+
+
+
+
+.exit-box{position:relative;max-width:420px;width:100%;text-align:center;padding:30px 24px 24px;border-radius:26px;background:#0f1d22;isolation:isolate;animation:exitIn .55s cubic-bezier(.2,.9,.3,1.2)}
+.exit-box::before{content:"";position:absolute;inset:-2px;border-radius:28px;padding:2px;background:linear-gradient(130deg,#6fd6b4,#f2c94c,#25d366,#6fd6b4);background-size:300% 300%;animation:exitBorder 3s linear infinite;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;z-index:-1}
+.exit-box::after{content:"";position:absolute;inset:0;border-radius:26px;box-shadow:0 0 40px rgba(111,214,180,.25);animation:exitGlow 2s ease-in-out infinite;pointer-events:none;z-index:-1}
+@keyframes exitIn{from{opacity:0;transform:scale(.8) translateY(20px)}to{opacity:1;transform:none}}
+@keyframes exitBorder{to{background-position:300% 0}}
+@keyframes exitGlow{50%{box-shadow:0 0 70px rgba(242,201,76,.35)}}
+.exit-top{font:600 .8rem 'Courier New',monospace;letter-spacing:.3em;color:#6fd6b4;margin-bottom:16px;display:flex;align-items:center;justify-content:center;gap:10px}
+.exit-top .dots{display:inline-flex;gap:3px;align-items:flex-end}
+.exit-top .dots i{width:7px;height:7px;border:1.5px solid #6fd6b4;border-radius:50%;animation:dotJump 1.2s ease-in-out infinite}
+.exit-top .dots i:nth-child(2){animation-delay:.15s}.exit-top .dots i:nth-child(3){animation-delay:.3s}
+@keyframes dotJump{0%,100%{transform:none}40%{transform:translateY(-5px)}}
+.exit-badge{display:inline-flex;align-items:center;gap:9px;background:#d4b06a;color:#132126;font-weight:700;font-size:.82rem;padding:8px 16px;border-radius:40px;margin-bottom:16px;animation:badgePulse 2s ease-in-out infinite}
+.exit-badge i{width:8px;height:8px;border-radius:50%;background:#132126;animation:blink 1s steps(2) infinite}
+@keyframes badgePulse{50%{transform:scale(1.04);box-shadow:0 0 22px rgba(212,176,106,.6)}}
+@keyframes blink{50%{opacity:.15}}
+.exit-box h3{font-family:'Inter',sans-serif;font-weight:800;font-size:1.75rem;color:#eef6f3;margin-bottom:12px;letter-spacing:-.01em}
+.exit-box>p{color:#a9b9b6;font-size:.98rem;line-height:1.6;margin-bottom:22px}
+.exit-box>p b{color:#fff}
+.exit-cta{width:100%;background:#5fd27a;color:#0d2416;font-weight:800;font-size:1.05rem;padding:17px;box-shadow:0 0 0 4px #0f1d22,0 0 0 6px #6fd6b4;animation:ctaPulse 1.6s ease-in-out infinite}
+.exit-cta svg{width:24px;height:24px}
+@keyframes ctaPulse{0%,100%{transform:scale(1);box-shadow:0 0 0 4px #0f1d22,0 0 0 6px #6fd6b4,0 0 0 6px rgba(95,210,122,.5)}50%{transform:scale(1.03);box-shadow:0 0 0 4px #0f1d22,0 0 0 6px #6fd6b4,0 0 0 18px rgba(95,210,122,0)}}
+.exit-num{margin:18px 0 0!important;font-size:.88rem!important}
+.exit-num a{color:#a9b9b6;text-decoration:underline}
+.exit-link{background:none;border:none;color:#a9b9b6;text-decoration:underline;font:500 .9rem 'Inter',sans-serif;margin-top:12px;cursor:pointer}
+.exit-x{z-index:2}
+@media (prefers-reduced-motion:reduce){.exit-box,.exit-box::before,.exit-box::after,.exit-badge,.exit-badge i,.exit-cta,.exit-top .dots i{animation:none}}
 .exit-x{position:absolute;top:12px;right:16px;background:none;border:none;color:var(--muted);font-size:1.5rem;cursor:pointer}
 
 /* crédito animado */
@@ -767,13 +790,13 @@ html.anim .hero .rv{transition-duration:1.1s}
 <div class="exit" id="exitPop" hidden>
   <div class="exit-box">
     <button class="exit-x" id="exitX" aria-label="Fechar">×</button>
-    <span class="ico" style="width:72px;height:72px;border-radius:20px;margin:0 auto 18px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/><path d="m10 8-2 2 2 2"/><path d="m14 8 2 2-2 2"/></svg></span>
-    <small class="exit-tag">Antes de sair...</small>
+    <div class="exit-top"><span class="dots"><i></i><i></i><i></i></span>ANTES DE SAIR</div>
+    <div class="exit-badge"><i></i>Site desenvolvido por Rodrigo Pinheiro</div>
     <h3>Gostou deste site?</h3>
-    <p>Este site foi criado por <b style="color:var(--acc)">Rodrigo Pinheiro</b>. Tenha um site profissional como este para o seu negócio. Peça seu orçamento pelo WhatsApp.</p>
-    <a class="btn btn-wa" href="https://wa.me/5591991198584?text=Vim%20pelo%20site%2C%20gostaria%20de%20fazer%20um%20or%C3%A7amento." target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-1 1.2-.4.2-.7.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.4 3.4 0 0 0-1 2.5 5.9 5.9 0 0 0 1.2 3.1 13.5 13.5 0 0 0 5.2 4.6c1.9.8 2.7.9 3.6.7a3.1 3.1 0 0 0 2-1.4 2.5 2.5 0 0 0 .2-1.4c-.1-.1-.3-.2-.6-.3zM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zm8.4-18.2A11.8 11.8 0 0 0 1.8 17.9L.1 24l6.3-1.7A11.8 11.8 0 0 0 24 12a11.7 11.7 0 0 0-3.6-8.4z"/></svg> Fazer meu orçamento</a>
-    <button class="btn btn-line" id="exitSim" style="width:100%">Continuar no site</button>
-    <small class="exit-num">(91) 99119-8584</small>
+    <p>Ele foi criado por <b>Rodrigo Pinheiro</b>. Faço sites profissionais com chatbot, cadastro de clientes e botão de WhatsApp para o seu negócio ou para a sua rede crescer.</p>
+    <a class="btn btn-wa exit-cta" href="https://wa.me/5591991198584?text=Vim%20pelo%20site%2C%20gostaria%20de%20fazer%20um%20or%C3%A7amento." target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-1 1.2-.4.2-.7.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.4 3.4 0 0 0-1 2.5 5.9 5.9 0 0 0 1.2 3.1 13.5 13.5 0 0 0 5.2 4.6c1.9.8 2.7.9 3.6.7a3.1 3.1 0 0 0 2-1.4 2.5 2.5 0 0 0 .2-1.4c-.1-.1-.3-.2-.6-.3zM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zm8.4-18.2A11.8 11.8 0 0 0 1.8 17.9L.1 24l6.3-1.7A11.8 11.8 0 0 0 24 12a11.7 11.7 0 0 0-3.6-8.4z"/></svg> Quero um site assim</a>
+    <p class="exit-num">WhatsApp do Rodrigo: <a href="https://wa.me/5591991198584?text=Vim%20pelo%20site%2C%20gostaria%20de%20fazer%20um%20or%C3%A7amento." target="_blank" rel="noopener">(91) 99119-8584</a></p>
+    <button class="exit-link" id="exitSim">Continuar no site</button>
   </div>
 </div>
 <a class="float-wa" data-wa="Olá, Vitoriano! Vim pelo seu site." href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-1 1.2-.4.2-.7.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.4 3.4 0 0 0-1 2.5 5.9 5.9 0 0 0 1.2 3.1 13.5 13.5 0 0 0 5.2 4.6c1.9.8 2.7.9 3.6.7a3.1 3.1 0 0 0 2-1.4 2.5 2.5 0 0 0 .2-1.4c-.1-.1-.3-.2-.6-.3zM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zm8.4-18.2A11.8 11.8 0 0 0 1.8 17.9L.1 24l6.3-1.7A11.8 11.8 0 0 0 24 12a11.7 11.7 0 0 0-3.6-8.4z"/></svg></a>
