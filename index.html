@@ -1046,7 +1046,9 @@ function hideExit(){$('exitPop').hidden=true}
 $('exitX').onclick=hideExit;$('exitSim').onclick=hideExit;
 $('exitPop').addEventListener('click',function(e){if(e.target.id==='exitPop')hideExit()});
 // computador: mouse saindo pelo topo da página
-var t0=Date.now();document.addEventListener('mouseout',function(e){if(!e.relatedTarget&&e.clientY<=0&&Date.now()-t0>4000&&matchMedia('(hover:hover)').matches)showExit()});
+var t0=Date.now();
+// aparece também após 25 segundos no site (se o chat não estiver aberto)
+setTimeout(function(){if($('botWin').hidden&&!exitShown){var tp=document.querySelector('.exit-top');if(tp)tp.lastChild.textContent='UM MINUTINHO';showExit()}},25000);document.addEventListener('mouseout',function(e){if(!e.relatedTarget&&e.clientY<=0&&Date.now()-t0>4000&&matchMedia('(hover:hover)').matches)showExit()});
 // celular: botão voltar
 try{history.pushState({p:1},'');addEventListener('popstate',function(){if(!exitShown){showExit();history.pushState({p:1},'')}})}catch(e){}
 // celular: volta para a aba depois de sair
