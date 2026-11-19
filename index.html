@@ -1167,7 +1167,9 @@ var CATALOGO_DADOS=[
   if(sim){var bt=document.querySelector('.tabs button[data-tab="'+sim+'"]'); if(bt){bt.click(); alvo=$('simulador');}}
   if(svc){var gi={med:0,chip:1,next:1,tv:2}[svc]; if(gi!==undefined){vdSel={g:gi,i:0}; calcVD(); alvo=$('svc-'+gi);}}
   if(!alvo && location.hash) alvo=document.querySelector(location.hash);
-  if(alvo){var ir=function(){alvo.scrollIntoView({block:'start'})}; setTimeout(ir,150); window.addEventListener('load',function(){setTimeout(ir,100)});}
+  if(alvo){var parou=false,ir=function(){if(!parou)alvo.scrollIntoView({block:'start'})};
+    ['wheel','touchstart','keydown'].forEach(function(ev){window.addEventListener(ev,function(){parou=true},{once:true,passive:true})});
+    [150,500,1000,1600,2400,3500].forEach(function(ms){setTimeout(ir,ms)}); window.addEventListener('load',function(){setTimeout(ir,100)});}
 })();
 </script>
 </body>
