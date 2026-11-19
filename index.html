@@ -402,6 +402,11 @@ html.anim .hero .rv{transition-duration:1.1s}
 .receipt tr.lock td{color:#5d6a80}.receipt tr.lock td:last-child{color:#5d6a80;font-weight:500}
 .receipt .calc{display:block;font-size:.74rem;color:var(--muted);margin-top:2px}
 @media(max-width:600px){.grad-grid{grid-template-columns:repeat(3,1fr)}.tree{gap:4px}.tnode{padding:6px 8px}.tnode b{font-size:.76rem}.tnode small{font-size:.62rem}.tree i{font-size:.8rem}.levels{grid-template-columns:1fr}}
+.story{display:grid;grid-template-columns:1fr 1fr;gap:26px;max-width:1000px;margin:36px auto 30px;text-align:left}
+.story figure{margin:0;position:relative}
+.story .step-n{position:absolute;top:-14px;left:-10px;z-index:2;width:38px;height:38px;border-radius:50%;background:var(--acc);color:var(--navy);font-weight:800;display:grid;place-items:center;box-shadow:0 6px 16px rgba(0,0,0,.5)}
+.story figcaption{margin-top:12px;color:var(--muted);font-size:.92rem;text-align:center}
+@media(max-width:900px){.story{grid-template-columns:1fr;gap:34px}}
 @media(max-width:900px){.stats-bar{grid-template-columns:1fr 1fr;margin-top:44px}.stats-bar div:nth-child(2){border-right:none}.stats-bar div{border-bottom:1px solid var(--line);text-align:center}.gal2,.lines{grid-template-columns:1fr}.cat-search{flex-direction:column}.tabs{display:grid;grid-template-columns:1fr 1fr;width:100%}.tabs button{padding:12px 8px;font-size:.85rem}.cat-card ul{columns:1}}
 @media(max-width:900px){.svc-grid{grid-template-columns:1fr}.hero::before{width:340px;height:340px;right:-140px}}
 
@@ -615,6 +620,19 @@ html.anim .hero .rv{transition-duration:1.1s}
       <p class="note">Exemplo: um cliente que consome 1.000 kWh por mês economiza 20% (200 kWh) e você ganha 40%, ou seja, R$ 400. Os percentuais podem variar; confirme as regras com o Luiz Ronny.</p>
       <a class="btn btn-wa" data-wa="Olá, Luiz Ronny! Quero saber mais sobre a ATL Energy e como ganhar indicando contas de luz." href="#"><svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-1 1.2-.4.2-.7.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.4 3.4 0 0 0-1 2.5 5.9 5.9 0 0 0 1.2 3.1 13.5 13.5 0 0 0 5.2 4.6c1.9.8 2.7.9 3.6.7a3.1 3.1 0 0 0 2-1.4 2.5 2.5 0 0 0 .2-1.4c-.1-.1-.3-.2-.6-.3zM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zm8.4-18.2A11.8 11.8 0 0 0 1.8 17.9L.1 24l6.3-1.7A11.8 11.8 0 0 0 24 12a11.7 11.7 0 0 0-3.6-8.4z"/></svg> Quero indicar energia</a>
     </div>
+  </div>
+</section>
+
+<!-- HISTORIA -->
+<section id="historia">
+  <div class="container center">
+    <span class="tag">Entenda em 1 minuto</span>
+    <h2>Preste bem atenção nesta história para você entender <em>o quanto esse negócio é simples</em></h2>
+    <div class="story">
+      <figure><span class="step-n">1</span><div class="photo"><img class="zoom" src="img/historia-1.jpg" alt="Quadrinhos: a família compra com desconto na Atlântica Natural, indica 10 amigos e ganha bônus" loading="lazy"></div><figcaption>A família compra com desconto, indica 10 amigos e ganha bônus.</figcaption></figure>
+      <figure><span class="step-n">2</span><div class="photo"><img class="zoom" src="img/historia-2.jpg" alt="Fluxograma: 10 amigos indicam mais 10 cada um, total de 100, e quanto cada graduação ganha" loading="lazy"></div><figcaption>Os 10 amigos indicam mais 10 cada um: são 100 pessoas comprando.</figcaption></figure>
+    </div>
+    <a class="btn btn-wa" data-wa="Olá, Luiz Ronny! Vi a história no seu site e quero entender como começar." href="#"><svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-1 1.2-.4.2-.7.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.4 3.4 0 0 0-1 2.5 5.9 5.9 0 0 0 1.2 3.1 13.5 13.5 0 0 0 5.2 4.6c1.9.8 2.7.9 3.6.7a3.1 3.1 0 0 0 2-1.4 2.5 2.5 0 0 0 .2-1.4c-.1-.1-.3-.2-.6-.3zM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zm8.4-18.2A11.8 11.8 0 0 0 1.8 17.9L.1 24l6.3-1.7A11.8 11.8 0 0 0 24 12a11.7 11.7 0 0 0-3.6-8.4z"/></svg> Quero começar agora</a>
   </div>
 </section>
 
@@ -1130,7 +1148,7 @@ var CATALOGO_DADOS=[
   var bar=document.createElement('div');bar.id='progress';document.body.appendChild(bar);
   addEventListener('scroll',function(){var h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
   if(!('IntersectionObserver' in window))return;
-  var sel='.stats-bar div,.gal2 .photo,.lines figure,.f14 div,.cat-search,.hero .tag,.hero h1,.hero p,.hero-actions,.hero-photo,section .tag,section h2,section .lead,.step,.card,.panel,.svc,.box,.pillars div,.ranks span,.faq details,.cta-box,.about-grid .photo,.two>div,.video-box,#servicos .photo,.tabs';
+  var sel='.story figure,.stats-bar div,.gal2 .photo,.lines figure,.f14 div,.cat-search,.hero .tag,.hero h1,.hero p,.hero-actions,.hero-photo,section .tag,section h2,section .lead,.step,.card,.panel,.svc,.box,.pillars div,.ranks span,.faq details,.cta-box,.about-grid .photo,.two>div,.video-box,#servicos .photo,.tabs';
   var els=document.querySelectorAll(sel);
   document.documentElement.classList.add('anim');
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
