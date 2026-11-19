@@ -604,7 +604,7 @@ html.anim .hero .rv{transition-duration:1.1s}
       </div>
     </div>
 
-    <div class="panel" style="margin-top:24px">
+    <div class="panel" id="energia" style="margin-top:24px;scroll-margin-top:90px">
       <h3 class="h3i"><span class="ico sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg></span>ATL Energy</h3>
       <p class="hint">Indique alguém para pagar menos na conta de luz. O cliente economiza e você ganha pela indicação.</p>
       <span class="lbl">Consumo de energia do cliente (por mês)</span>
@@ -959,7 +959,7 @@ var GRUPOS=[
 ];
 var vdSel={g:2,i:0}, vdQ=3;
 GRUPOS.forEach(function(g,gi){
-  var c=document.createElement('div');c.className='svc';
+  var c=document.createElement('div');c.className='svc';c.id='svc-'+gi;c.style.scrollMarginTop='90px';
   c.innerHTML='<img class="svc-img zoom" src="'+g.img+'" alt="'+g.n+'" loading="lazy"><div class="svc-head"><span class="ico">'+g.ic+'</span><div><b>'+g.n+'</b><small>'+g.d+'</small></div></div>';
   var og=document.createElement('div');og.className='opt-grid'+(g.p.length===1?' one':'');
   g.p.forEach(function(pl,pi){
@@ -1160,6 +1160,14 @@ var CATALOGO_DADOS=[
   });
   // segurança: nada fica invisível
   setTimeout(function(){document.querySelectorAll('.rv:not(.in)').forEach(function(el){var r=el.getBoundingClientRect();if(r.top<innerHeight)el.classList.add('in')})},1500);
+})();
+/* ===== Atalhos: ?sim=rede|revenda  ?svc=med|chip|tv ===== */
+(function(){
+  var q=new URLSearchParams(location.search), sim=q.get('sim'), svc=q.get('svc'), alvo=null;
+  if(sim){var bt=document.querySelector('.tabs button[data-tab="'+sim+'"]'); if(bt){bt.click(); alvo=$('simulador');}}
+  if(svc){var gi={med:0,chip:1,next:1,tv:2}[svc]; if(gi!==undefined){vdSel={g:gi,i:0}; calcVD(); alvo=$('svc-'+gi);}}
+  if(!alvo && location.hash) alvo=document.querySelector(location.hash);
+  if(alvo){var ir=function(){alvo.scrollIntoView({block:'start'})}; setTimeout(ir,150); window.addEventListener('load',function(){setTimeout(ir,100)});}
 })();
 </script>
 </body>
