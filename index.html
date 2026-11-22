@@ -406,6 +406,37 @@ html.anim .hero .rv{transition-duration:1.1s}
 .story figure{margin:0;position:relative}
 .story .step-n{position:absolute;top:-14px;left:-10px;z-index:2;width:38px;height:38px;border-radius:50%;background:var(--acc);color:var(--navy);font-weight:800;display:grid;place-items:center;box-shadow:0 6px 16px rgba(0,0,0,.5)}
 .story figcaption{margin-top:12px;color:var(--muted);font-size:.92rem;text-align:center}
+.flow{background:radial-gradient(ellipse at top,rgba(242,201,76,.08),transparent 60%),var(--bg);border:1px solid var(--line);border-radius:18px;padding:22px 14px;display:flex;flex-direction:column;align-items:center;gap:0}
+.fl-you{display:flex;flex-direction:column;align-items:center;gap:6px}
+.fl-you .pv{width:64px;height:64px;border-radius:50%;background:var(--acc);display:grid;place-items:center;box-shadow:0 0 0 4px rgba(242,201,76,.25),0 10px 24px rgba(0,0,0,.5);animation:flPulse 2.4s ease-in-out infinite}
+.fl-you .pv svg{width:40px;height:40px;fill:var(--navy)}
+.fl-you b{font-size:.95rem}.fl-you small{font-size:.75rem;color:var(--muted)}
+@keyframes flPulse{50%{box-shadow:0 0 0 10px rgba(242,201,76,0),0 10px 24px rgba(0,0,0,.5)}}
+.fl-arrow{width:2px;height:34px;margin:6px 0;background:repeating-linear-gradient(to bottom,var(--acc) 0 6px,transparent 6px 11px);background-size:2px 22px;animation:flDash .9s linear infinite;position:relative}
+.fl-arrow::after{content:"";position:absolute;bottom:-4px;left:-5px;border:6px solid transparent;border-top-color:var(--acc)}
+.fl-arrow.off{background:repeating-linear-gradient(to bottom,#3a4660 0 6px,transparent 6px 11px);animation:none}.fl-arrow.off::after{border-top-color:#3a4660}
+@keyframes flDash{to{background-position:0 22px}}
+.fl-lv{width:100%;max-width:620px;border:1px solid var(--line);border-radius:16px;padding:14px;background:var(--card);text-align:center}
+.fl-lv.off{opacity:.5}
+.fl-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:.85rem}
+.fl-head b{font-size:.95rem}.fl-head span{color:var(--muted)}
+.fl-ppl{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;min-height:30px}
+.fl-ppl svg{width:24px;height:24px;animation:flPop .45s cubic-bezier(.2,.9,.3,1.4) backwards}
+.fl-more{font-size:.8rem;font-weight:700;color:var(--acc);align-self:center;margin-left:4px}
+@keyframes flPop{from{transform:scale(0);opacity:0}to{transform:none;opacity:1}}
+.fl-calc{margin-top:10px;font-size:.85rem;color:var(--muted)}
+.fl-calc b{color:var(--acc);font-size:1.05rem}
+.fl-total{margin-top:14px;background:var(--acc);color:var(--navy);border-radius:14px;padding:12px 18px;font-weight:800;text-align:center}
+.fl-total small{display:block;font-weight:600;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase}
+.fl-total span{font-family:'Playfair Display',serif;font-size:1.5rem}
+.cf{margin-top:8px;display:flex;flex-direction:column;align-items:center;gap:2px;background:rgba(242,201,76,.06);border:1px solid rgba(242,201,76,.25);border-radius:12px;padding:10px 8px}
+.cf-n{font-size:.78rem;text-align:center;line-height:1.35}
+.cf-n b{color:var(--acc)}
+.cf-ic{display:flex;gap:2px;justify-content:center;flex-wrap:wrap}
+.cf-ic svg{width:15px;height:15px}
+.cf-ar{color:var(--acc);font-size:.8rem;line-height:1}
+.cf-go{margin-top:6px;font-size:.78rem}
+@media (prefers-reduced-motion:reduce){.fl-arrow,.fl-you .pv,.fl-ppl svg{animation:none}}
 @media(max-width:900px){.story{grid-template-columns:1fr;gap:34px}}
 @media(max-width:900px){.stats-bar{grid-template-columns:1fr 1fr;margin-top:44px}.stats-bar div:nth-child(2){border-right:none}.stats-bar div{border-bottom:1px solid var(--line);text-align:center}.gal2,.lines{grid-template-columns:1fr}.cat-search{flex-direction:column}.tabs{display:grid;grid-template-columns:1fr 1fr;width:100%}.tabs button{padding:12px 8px;font-size:.85rem}.cat-card ul{columns:1}}
 @media(max-width:900px){.svc-grid{grid-template-columns:1fr}.hero::before{width:340px;height:340px;right:-140px}}
@@ -542,7 +573,9 @@ html.anim .hero .rv{transition-duration:1.1s}
       <p class="mini">Toque nos números ou digite a quantidade.</p>
       <div class="levels" id="levels"></div>
 
-      <span class="lbl">4. Veja a conta, passo a passo</span>
+      <span class="lbl">4. Veja o seu time em desenho</span>
+      <div class="flow" id="flow"></div>
+      <span class="lbl">5. Veja a conta, passo a passo</span>
       <div class="tbl"><table class="receipt" id="receipt"></table></div>
       <div class="total"><span>Seu bônus de produtividade no mês</span><strong id="total">R$ 0,00</strong></div>
       <div class="explain" id="explain"></div>
@@ -927,6 +960,28 @@ function totalDe(k,base){
   var t=0; for(var n=0;n<NL;n++){t+=(+$('pp'+n).value||0)*base*(GRADS[k].p[n]||0)/100} return t;
 }
 
+
+/* ===== FLUXOGRAMA COM BONEQUINHOS ===== */
+var LVC=['#f2c94c','#7fd8a0','#8fb4ff'];
+function boneco(c){return '<svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4.2" fill="'+c+'"/><path d="M3.5 22c0-4.8 3.8-8 8.5-8s8.5 3.2 8.5 8z" fill="'+c+'"/></svg>'}
+function drawFlow(base,gr,qs,gs){
+  var max=18,h='<div class="fl-you"><div class="pv"><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4.2"/><path d="M3.5 22c0-4.8 3.8-8 8.5-8s8.5 3.2 8.5 8z"/></svg></div><b>Você</b><small>Graduação '+gr.n+'</small></div>',tot=0;
+  for(var n=0;n<qs.length;n++){
+    var q=qs[n],pct=gr.p[n]||0,ic='';
+    for(var i=0;i<Math.min(q,max);i++)ic+=boneco(pct?LVC[n]:'#4a5670').replace('<svg','<svg style="animation-delay:'+(i*35+n*120)+'ms"');
+    if(q>max)ic+='<span class="fl-more">+'+(q-max)+'</span>';
+    tot+=gs[n];
+    h+='<div class="fl-arrow'+(pct?'':' off')+'"></div><div class="fl-lv'+(pct?'':' off')+'"><div class="fl-head"><b>'+(n+1)+'º nível</b><span>'+q+(q===1?' pessoa':' pessoas')+' × '+br0(base)+'</span></div><div class="fl-ppl">'+ic+'</div><div class="fl-calc">'+(pct?'Compram '+br0(q*base)+' → '+pct+'% para você = <b>'+brl(gs[n])+'</b>':gr.n+' ainda não recebe neste nível')+'</div></div>';
+  }
+  h+='<div class="fl-total"><small>Seu bônus no mês</small><span>'+brl(tot)+'</span></div>';
+  $('flow').innerHTML=h;
+}
+function chatFlow(){
+  var p=[3,9,15],q=10,b=500,h='<div class="cf"><div class="cf-n"><b>Você</b></div><div class="cf-ar">▼</div><div class="cf-ic">';
+  for(var i=0;i<10;i++)h+=boneco('#f2c94c');
+  h+='</div><div class="cf-n">10 amigos compram R$ 500 = R$ 5.000</div><div class="cf-ar">▼</div><div class="cf-n">Bronze&nbsp;3%&nbsp;=&nbsp;<b>R$&nbsp;150</b><br>Ouro&nbsp;9%&nbsp;=&nbsp;<b>R$&nbsp;450</b><br>Diamante&nbsp;15%&nbsp;=&nbsp;<b>R$&nbsp;750</b></div></div><div class="cf-go"><a href="#simulador" onclick="closeBot()">👉 Ver o desenho completo no simulador</a></div>';
+  return h;
+}
 function br0(v){return 'R$ '+v.toLocaleString('pt-BR',{maximumFractionDigits:2})}
 function calc(){
   var base=+$('base').value||0, gr=GRADS[g], total=0, rows='<tr><th>Nível</th><th>Conta</th><th>Você ganha</th></tr>';
@@ -940,6 +995,8 @@ function calc(){
     rows+='<tr class="'+(pct?'':'lock')+'"><td><b>'+(n+1)+'º</b></td><td>'+qtd+(qtd===1?' pessoa comprou ':' pessoas compraram ')+br0(compras)+'<span class="calc">'+(pct?pct+'% de '+br0(compras):gr.n+' não recebe no '+(n+1)+'º nível · libera no '+liberaEm(n))+'</span></td><td>'+brl(ganho)+'</td></tr>';
   }
   $('receipt').innerHTML=rows;
+  var qs=[],gs=[];for(var m=0;m<NL;m++){var qq=+$('pp'+m).value||0;qs.push(qq);gs.push(qq*base*(gr.p[m]||0)/100)}
+  drawFlow(base,gr,qs,gs);
   $('total').textContent=brl(total);
   var q1=+$('pp0').value||0;
   $('explain').innerHTML='<b>Resumindo:</b> como <b>'+gr.n+'</b>, se '+q1+(q1===1?' pessoa':' pessoas')+' que você indicou '+(q1===1?'comprar':'comprarem')+' '+brl(base)+' cada, você recebe <b>'+gr.p[0]+'%</b> disso: <b>'+brl(q1*base*gr.p[0]/100)+'</b>. Somando os 3 níveis, seu bônus no mês é de <b>'+brl(total)+'</b>.';
@@ -1012,8 +1069,8 @@ var KB=[
  {k:['tv','canais','streaming','filme'],r:'A <b>ATL TV</b> tem mais de 170 canais. Na venda direta você ganha <b>R$ 35 por adesão</b>. Vendendo 3 por dia, são cerca de R$ 3.150 no mês.'},
  {k:['internet','chip','esim','next','celular','plano movel'],r:'O <b>ATL Next</b> oferece chip físico e eSIM com internet. Você ganha de duas formas: <b>R$ 15 pela adesão</b> de cada cliente e um <b>ganho recorrente todo mês</b> enquanto o cliente continuar pagando. E o cliente ainda ganha <b>Sky+</b> (milhares de canais e streaming) <b>ou Deezer</b>, à escolha dele, em qualquer plano do chip.'},
  {k:['energia','energy','luz','kwh','conta de luz'],r:'Com a <b>ATL Energy</b> o cliente economiza cerca de <b>20%</b> na energia e você ganha <b>40%</b> pela indicação. Exemplo: um cliente de 1.000 kWh economiza 200 kWh por mês e você ganha R$ 400. Com 10 clientes assim, R$ 4.000. Tem um simulador aqui no site!'},
- {k:['ganh','renda','lucro','dinheiro','comiss','salario','salário'],r:'Você ganha de 3 formas:<br>1️⃣ <b>Revenda</b>: o lucro de cada produto vendido.<br>2️⃣ <b>Serviços</b>: valor por adesão (ATL Med, TV, Next) e indicação de energia.<br>3️⃣ <b>Rede</b>: Bônus de Produtividade sobre as compras da sua equipe.<br>Use os simuladores do site para ver os números.'},
- {k:['bonus','bônus','produtividade','porcentagem','nivel','nível','niveis','níveis'],r:'No <b>Bônus de Produtividade</b> você ganha uma % das compras da sua rede:<br>• Bronze: 3% e 3% (2 níveis)<br>• Prata: 6%, 6%, 3%<br>• Ouro: 9%, 9%, 6%, 3%<br>• Esmeralda: 12%, 12%, 9%, 6%, 3%<br>• Diamante: 15%, 15%, 12%, 9%, 6%, 3%<br>É preciso estar ativo no mês.'},
+ {k:['ganh','renda','lucro','dinheiro','comiss','salario','salário'],r:'Você ganha de 3 formas:<br>1️⃣ <b>Revenda</b>: o lucro de cada produto vendido.<br>2️⃣ <b>Serviços</b>: valor por adesão (ATL Med, TV, Next) e indicação de energia.<br>3️⃣ <b>Rede</b>: Bônus de Produtividade sobre as compras da sua equipe.<br>Use os simuladores do site para ver os números.'+chatFlow()},
+ {k:['bonus','bônus','produtividade','porcentagem','nivel','nível','niveis','níveis'],r:'No <b>Bônus de Produtividade</b> você ganha uma % das compras da sua rede:<br>• Bronze: 3% e 3% (2 níveis)<br>• Prata: 6%, 6%, 3%<br>• Ouro: 9%, 9%, 6%, 3%<br>• Esmeralda: 12%, 12%, 9%, 6%, 3%<br>• Diamante: 15%, 15%, 12%, 9%, 6%, 3%<br>É preciso estar ativo no mês.'+chatFlow()},
  {k:['gradua','bronze','prata','ouro','esmeralda','diamante','royal','imperial','carreira','plano de'],r:'As graduações são: Bronze, Prata, Ouro, Esmeralda, Diamante, Diamante Elite, Duplo Diamante, Triplo Diamante, Imperial Diamante e Royal Diamante. Você sobe conforme o volume da sua equipe cresce, e passa a ganhar mais e em mais níveis.'},
  {k:['residual','recorrente','todo mes','todo mês'],r:'Nos serviços também existe o <b>ganho residual</b>: conforme sua rede de vendas cresce, você ganha sobre os planos ativos. A tabela completa está na imagem da seção "Ganhe também com serviços".'},
  {k:['estoque','estocar','guardar produto'],r:'Não é obrigatório ter estoque. Você pode trabalhar por encomenda ou manter alguns itens à pronta entrega, como preferir.'},
